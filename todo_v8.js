@@ -37,21 +37,56 @@ let todoList = {
     toggleAll: function () {
         let totalTodos = this.todos.length;
         let completedTodos = 0;
-        for( let i = 0; i < this.todos.length; i++){
-            if(this.todos[i].completed = true) {
+        for( let i = 0; i < totalTodos; i++){
+            if(this.todos[i].completed === true) {
                 completedTodos++;
             }
         }
             if(completedTodos === totalTodos) {
-                for(let i = 0; i < this.todos.length; i++){
+                for(let i = 0; i < totalTodos; i++){
                     this.todos[i].completed = false;      
                 }
             } else {
-                for(let i = 0; i < this.todos.length; i++){
+                for(let i = 0; i < totalTodos; i++){
                     this.todos[i].completed = true;         
                 }
             }
         this.showTodos();
     }
 }
+
+const handlers = {
+    showTodos:  () => {
+        todoList.showTodos();
+    },
+    addTodo: () => {
+        let addTodoInputText = document.querySelector('#addTodoInputText');
+        todoList.addTodo(addTodoInputText.value);
+        addTodoInputText.value = '';
+    },
+    editTodo: () => {
+        let editTodoPositionInput = document.querySelector('#editTodoPositionInput');
+        let editTodoTextInput = document.querySelector('#editTodoTextInput');
+        todoList.editTodo(editTodoPositionInput.valueAsNumber, editTodoTextInput.value);
+        editTodoPositionInput.value = '';
+        editTodoTextInput.value = '';
+    },
+    deleteTodo: () => {
+        let deleteTodoPositionInput = document.getElementById('deleteTodoPositionInput');
+        todoList.deleteTodo(deleteTodoPositionInput.valueAsNumber);
+        deleteTodoPositionInput.value = ''
+    },
+    toggleCompleted: () => {
+        let toggleCompletedPositionInput = document.getElementById('toggleCompletedPositionInput');
+        todoList.toggleCompleted(toggleCompletedPositionInput.valueAsNumber);
+        toggleCompletedPositionInput.value = '';
+    },
+    toggleAll: () => {
+        todoList.toggleAll();
+    }
+}
+
+
+
+
 

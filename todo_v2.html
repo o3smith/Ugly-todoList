@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List - Watch and Code</title>
+    <script defer src="todo_v8.js"></script>
+</head>
+<body>
+<div>
+    <h1>A TodoList</h1>
+    <h2>Get your stuff done so you can do fun stuff</h2>
+    <button onclick='handlers.showTodos()' >Display Todos</button>
+    <button onclick='handlers.toggleAll()'>Toggle all!</button>
+</div>
+<div>
+    <button onclick='handlers.addTodo()'>+</button>
+    <input id='addTodoInputText' type="text">
+<div>
+    <button onclick='handlers.editTodo()'>Edit Todo</button>
+    <input id='editTodoPositionInput' type="number">
+    <input id='editTodoTextInput' type="text">
+</div>
+<div>
+    <button onclick='handlers.deleteTodo()'>Delete Todo</button>
+    <input type="number" id="deleteTodoPositionInput">
+</div>
+<div>
+    <button onclick='handlers.toggleCompleted()'>Toggle Completed</button>
+    <input type="number" id='toggleCompletedPositionInput'
+</body>
+</html>

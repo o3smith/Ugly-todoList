@@ -19,20 +19,22 @@ const todoList = {
     toggleAll: function () {
         let totalTodos = this.todos.length;
         let completedTodos = 0;
-        for( let i = 0; i < totalTodos; i++){
-            if(this.todos[i].completed === true) {
+        this.todos.forEach(todo => {
+            if(todo.completed === true) {
                 completedTodos++;
             }
-        }
+        })
+            //if everything is true, make everything false
             if(completedTodos === totalTodos) {
-                for(let i = 0; i < totalTodos; i++){
-                    this.todos[i].completed = false;      
+                this.todos.forEach(todo => {
+                    todo.completed = false;
+                })      
+                //if everything is false, make anything true
+                } else {
+                this.todos.forEach(todo => {
+                    todo.completed = true;
+                })
                 }
-            } else {
-                for(let i = 0; i < totalTodos; i++){
-                    this.todos[i].completed = true;         
-                }
-            }
     }
 }
 
@@ -54,6 +56,7 @@ const handlers = {
     deleteTodo: (position) => {
         todoList.deleteTodo(position);
         view.showTodos();
+        
     },
     toggleCompleted: () => {
         let toggleCompletedPositionInput = document.getElementById('toggleCompletedPositionInput');
@@ -68,24 +71,23 @@ const handlers = {
 }
 
 const view = {
-    showTodos: () => {
+    showTodos: function() {
         let todosUl = document.querySelector('ul');
         todosUl.innerHTML = '';
-        for (let i = 0; i < todoList.todos.length; i++){  
+        todoList.todos.forEach((todo, position) => {
             let todoLi = document.createElement('li');
             let todoTextWithCompletion = '';
-            let todo = todoList.todos[i];
-
-            if(todo.completed === true) {
+            
+            if(todo.completed ===true){
                 todoTextWithCompletion = '(x) ' + todo.todoText;
             } else {
-                todoTextWithCompletion = '( ) ' + todo.todoText;
+                todoTextWithCompletion = '( )' + todo.todoText;
             }
-            todoLi.id = i;
+            todoLi.id = position;
             todoLi.textContent = todoTextWithCompletion;
-            todoLi.appendChild(view.createDeleteButton());
+            todoLi.appendChild(this.createDeleteButton());
             todosUl.appendChild(todoLi);
-        }
+        }, this);
     },
     createDeleteButton: () => {
         let deleteButton = document.createElement('button');
@@ -105,5 +107,6 @@ const view = {
         });
     }
 };
+
 
 view.setUpEventListeners();
